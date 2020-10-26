@@ -6,6 +6,7 @@ import Like from "./components/Like"
 
 function App() {
   const [data, setData] = useState([])
+  const [likes, setLikes] = useState([])
   
   useEffect(() => {
     fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
@@ -14,19 +15,23 @@ function App() {
         const item = res.drinks
         setData(...item)
       })
-  }, [])
+  }, [likes])
   
   console.log(data)
+
+  const handleLike = (data) => {
+    setLikes([...likes,data.strDrink])
+    localStorage.setItem('like', likes)
+  }
   
   return (
     <div className="App">
       <Navbar />
       <div className="App-content">
         <img src={data.strDrinkThumb} className="App-logo" alt="logo" />
-        <div>
-          <Like stroke="black" fill="red" size={.5} />
-        </div>
-  
+        <button onClick={()=>handleLike(data)}>
+          <Like stroke="black" fill="red" size={.5}/>
+        </button>
         <p>
           {data.idDrink}
         </p>
