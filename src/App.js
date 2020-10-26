@@ -1,7 +1,19 @@
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  const [data, setData] = useState({})
+
+  useEffect(() => {
+    if(data === {}){
+      fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+        .then(res => res.json())
+        .then(res => setData({res}))
+      console.log(data)
+    }
+  })
   return (
     <div className="App">
       <header className="App-header">
