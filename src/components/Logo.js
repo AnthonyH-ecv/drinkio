@@ -2,7 +2,7 @@ import * as React from "react"
 
 export default function Logo(props) {
     return (
-        <svg width={512} viewBox="256 256 512 256" {...props}>
+        <svg width={246} viewBox="256 256 512 256" {...props}>
             <g textAnchor="middle">
                 <g
                     style={{
