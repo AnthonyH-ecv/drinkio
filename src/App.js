@@ -9,19 +9,22 @@ function App() {
   const [likes, setLikes] = useState([])
   
   useEffect(() => {
+    //fetch data
     fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
       .then(res => res.json())
       .then(res => {
         const item = res.drinks
         setData(...item)
       })
+    
+    //update localStorage with drink name
+    localStorage.setItem('like', JSON.stringify(likes))
   }, [likes])
   
   console.log(data)
 
   const handleLike = (data) => {
     setLikes([...likes,data.strDrink])
-    localStorage.setItem('like', likes)
   }
   
   return (
