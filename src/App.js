@@ -32,9 +32,7 @@ function App() {
       <Navbar />
       <div className="App-content">
         <img src={data.strDrinkThumb} className="App-logo" alt="logo" />
-        <button onClick={()=>handleLike(data)}>
-          <Like stroke="black" fill="red" size={.5}/>
-        </button>
+        <Like stroke="black" fill="red" size={.5} onClick={() =>handleLike(data)}/>
         <p>
           {data.idDrink}
         </p>
