@@ -24,6 +24,16 @@
     img {
       max-height: 36px;
     }
+
+    .App-router {
+      display: flex;
+      > :first-child, > :last-child {
+        flex-basis: 20%;
+      }
+      > :nth-child(0n+2) {
+        flex-basis: 80%;
+      }
+    }
   }
 
   .App-content {
