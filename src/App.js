@@ -1,60 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import './App.scss';
+import React, { useState, useEffect, useReducer } from 'react';
+import { fetchCocktail } from './domain/cocktails.service'
+import { default as cocktailReducer, initialState}  from './domain/cocktails.reducer'
 
 import Navbar from "./components/Navbar"
 import Like from "./components/Like"
 import Dislike from "./components/Dislike"
 
+import './App.scss';
+
 function App() {
-  const [data, setData] = useState([])
-  const [likes, setLikes] = useState([])
-  
-  const fetchCocktails = () => {
-    fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
-      .then(res => res.json())
-      .then(res => {
-        const item = res.drinks
-        setData(...item)
-      })
-  }
+  const [state, dispatch] = useReducer(cocktailReducer, initialState)
+  const [cocktails, setCocktails] = useState([])
+
   
   useEffect(() => {
-    fetchCocktails()
+    // fetch data
+    fetchCocktail(dispatch, cocktails)
     
     //update localStorage with drink name
-    localStorage.setItem('like', JSON.stringify(likes))
-  }, [likes])
-  
-  console.log(data)
+    localStorage.setItem('like', JSON.stringify(cocktails))
+
+  }, [cocktails])
 
   const handleLike = (data, type = 'like') => {
-    console.log(type)
       switch (type) {
           case 'dislike':
-            return fetchCocktails()
+            return fetchCocktail(dispatch, data)
           case 'like':
-          default: return setLikes([...likes,data.strDrink])
+          default: return setCocktails([...cocktails, data])
       }
   }
-  
+
   return (
     <div className="App">
       <Navbar />
       <div className="App-content">
         <div className="Drink-card">
           <div className="Drink-img">
-            <img src={data.strDrinkThumb} className="App-logo" alt="logo" />
+            <img src={state.cocktail ? state.cocktail.strDrinkThumb : ''} className="App-logo" alt="logo" />
           </div>
           <div className="Drink-data">
             <p className="Drink-title">
-              {data.strDrink}
+              {state.cocktail ? state.cocktail.strDrink : ''}
             </p>
           </div>
         </div>
       </div>
       <div className="App-footer">
-        <Like stroke="black" fill="red" size={.5} onClick={() => handleLike(data, 'like')} />
-        <Dislike stroke="black" fill="red" size={.5} onClick={() => handleLike(data, 'dislike')} />
+        <Like stroke="black" fill="red" size={.5} onClick={() => handleLike(state.cocktail ? [state.cocktail] : [], 'like')} />
+        <Dislike stroke="black" fill="red" size={.5} onClick={() => handleLike(state.cocktail ? [state.cocktail] : [], 'dislike')} />
       </div>
     </div>
   );
