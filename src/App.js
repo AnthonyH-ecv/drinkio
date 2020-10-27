@@ -5,6 +5,8 @@ import Navbar from "./components/Navbar"
 import Like from "./components/Like"
 import Dislike from "./components/Dislike"
 
+import info from "./info.png"
+
 function App() {
   const [data, setData] = useState([])
   const [likes, setLikes] = useState([])
@@ -28,7 +30,6 @@ function App() {
   console.log(data)
 
   const handleLike = (data, type = 'like') => {
-    console.log(type)
       switch (type) {
           case 'dislike':
             return fetchCocktails()
@@ -43,18 +44,22 @@ function App() {
       <div className="App-content">
         <div className="Drink-card">
           <div className="Drink-img">
-            <img src={data.strDrinkThumb} className="App-logo" alt="logo" />
+            <img src={data.strDrinkThumb} alt={data.strDrink} />
           </div>
           <div className="Drink-data">
-            <p className="Drink-title">
-              {data.strDrink}
-            </p>
+            <div className="Drink-title">
+              <p className="title">{data.strDrink}</p>
+              <p className="category">{data.strCategory}</p>
+            </div>
+            <div className="Drink-info">
+              <img src={info} alt="More informations" />
+            </div>
           </div>
         </div>
       </div>
       <div className="App-footer">
-        <Like stroke="black" fill="red" size={.5} onClick={() => handleLike(data, 'like')} />
-        <Dislike stroke="black" fill="red" size={.5} onClick={() => handleLike(data, 'dislike')} />
+        <Like stroke="black" fill="red" size={.25} onClick={() => handleLike(data, 'like')} />
+        <Dislike stroke="black" fill="red" size={.25} onClick={() => handleLike(data, 'dislike')} />
       </div>
     </div>
   );

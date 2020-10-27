@@ -6,11 +6,11 @@ export default function Like(props) {
     return (
         <div onClick={onClick}>
             <svg style={{enableBackground: "new 0 0 512 512"}}
-                viewBox="0 0 512 550"
+                viewBox="-20 -20 540 520"
                 width={loveSize} height={loveSize}
                 fill={fill}
                 stroke={stroke}
-                strokeWidth="20"
+                strokeWidth="0"
             >
                 <g>
                     <g>
