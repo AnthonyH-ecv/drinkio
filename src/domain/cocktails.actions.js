@@ -10,10 +10,13 @@ export const types = {
     }
 } */
 
-export function fetchCocktailSuccess(cocktail) {
+export function fetchCocktailSuccess(cocktail, cocktailLiked) {
     return {
         type: types.FETCH_COCKTAIL_SUCCESS,
-        payload: cocktail
+        payload: {
+            cocktail,
+            cocktailLiked
+        }
     }
 }
 

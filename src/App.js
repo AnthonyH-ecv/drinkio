@@ -28,7 +28,7 @@ function App() {
           case 'dislike':
             return fetchCocktail(dispatch, data)
           case 'like':
-          default: return setCocktails([...cocktails, data])
+          default: return setCocktails([...cocktails,data])
       }
   }
 
