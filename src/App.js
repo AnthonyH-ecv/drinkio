@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
+import { fetchCocktail } from './domain/cocktails.service'
+import { default as cocktailReducer, initialState}  from './domain/cocktails.reducer'
 import './App.scss';
 
 import Navbar from "./components/Navbar"
@@ -8,48 +10,40 @@ import Dislike from "./components/Dislike"
 import info from "./info.png"
 
 function App() {
-  const [data, setData] = useState([])
-  const [likes, setLikes] = useState([])
-  
-  const fetchCocktails = () => {
-    fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
-      .then(res => res.json())
-      .then(res => {
-        const item = res.drinks
-        setData(...item)
-      })
-  }
+  const [state, dispatch] = useReducer(cocktailReducer, initialState)
+  const [cocktails, setCocktails] = useState([])
+
   
   useEffect(() => {
-    fetchCocktails()
+    // fetch data
+    fetchCocktail(dispatch, cocktails)
     
     //update localStorage with drink name
-    localStorage.setItem('like', JSON.stringify(likes))
-  }, [likes])
-  
-  console.log(data)
+    localStorage.setItem('like', JSON.stringify(cocktails))
+
+  }, [cocktails])
 
   const handleLike = (data, type = 'like') => {
       switch (type) {
           case 'dislike':
-            return fetchCocktails()
+            return fetchCocktail(dispatch, data)
           case 'like':
-          default: return setLikes([...likes,data.strDrink])
+          default: return setCocktails([...cocktails, data])
       }
   }
-  
+
   return (
     <div className="App">
       <Navbar />
       <div className="App-content">
         <div className="Drink-card">
           <div className="Drink-img">
-            <img src={data.strDrinkThumb} alt={data.strDrink} />
+            <img src={state.cocktail ? state.cocktail.strDrinkThumb : ''} className={state.cocktail ? state.cocktail.strDrink : ''} alt="logo" />
           </div>
           <div className="Drink-data">
             <div className="Drink-title">
-              <p className="title">{data.strDrink}</p>
-              <p className="category">{data.strCategory}</p>
+              <p className="title">{state.cocktail ? state.cocktail.strDrink : ''}</p>
+              <p className="category">{state.cocktail ? state.cocktail.strCategory : ''}</p>
             </div>
             <div className="Drink-info">
               <img src={info} alt="More informations" />
@@ -58,8 +52,8 @@ function App() {
         </div>
       </div>
       <div className="App-footer">
-        <Like stroke="black" fill="red" size={.25} onClick={() => handleLike(data, 'like')} />
-        <Dislike stroke="black" fill="red" size={.25} onClick={() => handleLike(data, 'dislike')} />
+        <Like stroke="black" fill="red" size={.25} onClick={() => handleLike(state.cocktail ? [state.cocktail] : [], 'like')} />
+        <Dislike stroke="black" fill="red" size={.25} onClick={() => handleLike(state.cocktail ? [state.cocktail] : [], 'dislike')} />
       </div>
     </div>
   );
