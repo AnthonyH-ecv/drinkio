@@ -9,6 +9,7 @@
   text-align: center;
 
   > * {
+    width: 100%;
     margin: 2rem;
   }
 
@@ -21,6 +22,18 @@
     width: 100%;
   }
 
+  .App-content {
+    .Drink-card {
+      position: relative;
+      .Drink-data {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+  }
+
   .App-link {
     color: #61dafb;
   }
@@ -28,6 +41,8 @@
   .App-footer {
     display: flex;
     flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
   }
 }
 
