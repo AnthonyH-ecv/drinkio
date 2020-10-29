@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import { fetchCocktail } from './domain/cocktails.service'
+import { fetchCocktail, getInfoRecipe } from './domain/cocktails.service'
 import { default as cocktailReducer, initialState}  from './domain/cocktails.reducer'
 import './App.scss';
 
 import Navbar from "./components/Navbar"
 import Like from "./components/Like"
 import Dislike from "./components/Dislike"
+import DrinkCard from './components/DrinkCard';
 
-import info from "./info.png"
+
 
 function App() {
   const [state, dispatch] = useReducer(cocktailReducer, initialState)
@@ -32,24 +33,12 @@ function App() {
       }
   }
 
+  console.log(state)
   return (
     <div className="App">
       <Navbar />
       <div className="App-content">
-        <div className="Drink-card">
-          <div className="Drink-img">
-            <img src={state.cocktail ? state.cocktail.strDrinkThumb : ''} className={state.cocktail ? state.cocktail.strDrink : ''} alt="logo" />
-          </div>
-          <div className="Drink-data">
-            <div className="Drink-title">
-              <p className="title">{state.cocktail ? state.cocktail.strDrink : ''}</p>
-              <p className="category">{state.cocktail ? state.cocktail.strCategory : ''}</p>
-            </div>
-            <div className="Drink-info">
-              <img src={info} alt="More informations" />
-            </div>
-          </div>
-        </div>
+        <DrinkCard cocktail={state.cocktail} onClick={()=> getInfoRecipe(dispatch)}/>
       </div>
       <div className="App-footer">
         <Like stroke="black" fill="red" size={.25} onClick={() => handleLike(state.cocktail ? [state.cocktail] : [], 'like')} />

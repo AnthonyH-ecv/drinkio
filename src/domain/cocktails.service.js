@@ -1,4 +1,4 @@
-import { fetchCocktailSuccess, fetchCocktailError } from './cocktails.actions';
+import { fetchCocktailSuccess, fetchCocktailError, getCocktailRecipe } from './cocktails.actions';
 
 export function fetchCocktail(dispatch, cocktails) {
     fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
@@ -18,4 +18,8 @@ export function fetchCocktail(dispatch, cocktails) {
             }
         })
         .catch(error => dispatch(fetchCocktailError(error)))
+}
+
+export function getInfoRecipe(dispatch) {
+    dispatch(getCocktailRecipe())
 }

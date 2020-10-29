@@ -3,7 +3,8 @@ import { types } from './cocktails.actions';
 export const initialState = {
     pending: false,
     cocktail: null,
-    cocktailLiked: null,
+    cocktailLiked: [],
+    getRecipe: false,
     error: null
 }
 
@@ -26,6 +27,11 @@ export default function reducer (state, action) {
                 ...state,
                 pending: false,
                 error: action.error
+            }
+        case types.GET_COCKTAIL_RECIPE:
+            return {
+                ...state,
+                getRecipe: !state.getRecipe
             }
         default:
             return state;
