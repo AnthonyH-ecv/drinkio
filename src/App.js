@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import { fetchCocktail, getInfoRecipe } from './domain/cocktails.service'
+import { fetchCocktail } from './domain/cocktails.service'
 import { default as cocktailReducer, initialState}  from './domain/cocktails.reducer'
-import './App.scss';
 
 import Navbar from "./components/Navbar"
 import Like from "./components/Like"
 import Dislike from "./components/Dislike"
 import DrinkCard from './components/DrinkCard';
 
+import './App.scss';
 
 
 function App() {
@@ -24,13 +24,12 @@ function App() {
 
   }, [cocktails])
 
-  const handleLike = (data, type = 'like') => {
-      switch (type) {
-          case 'dislike':
-            return fetchCocktail(dispatch, data)
-          case 'like':
-          default: return setCocktails([...cocktails,data])
-      }
+  const handleLike = (cocktail) => {
+      setCocktails([...cocktails,cocktail])
+  }
+
+  const handleDislike = (cocktail) => {
+    fetchCocktail(dispatch, cocktail)
   }
 
   console.log(state)
@@ -38,11 +37,11 @@ function App() {
     <div className="App">
       <Navbar />
       <div className="App-content">
-        <DrinkCard cocktail={state.cocktail} onClick={()=> getInfoRecipe(dispatch)}/>
+        <DrinkCard cocktail={state.cocktail}/>
       </div>
       <div className="App-footer">
-        <Like stroke="black" fill="red" size={.25} onClick={() => handleLike(state.cocktail ? [state.cocktail] : [], 'like')} />
-        <Dislike stroke="black" fill="red" size={.25} onClick={() => handleLike(state.cocktail ? [state.cocktail] : [], 'dislike')} />
+        <Like stroke="black" fill="red" size={.25} onClick={() => handleLike(state.cocktail ? [state.cocktail] : [])} />
+        <Dislike stroke="black" fill="red" size={.25} onClick={() => handleDislike(state.cocktail ? [state.cocktail] : [])} />
       </div>
     </div>
   );
