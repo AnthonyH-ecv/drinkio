@@ -1,7 +1,6 @@
 import * as React from "react"
 import drinkio from "./../drinkio.png"
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
-// import Logo from "./Logo";
+import {Link} from "react-router-dom";
 
 export default function Navbar() {
     return (
