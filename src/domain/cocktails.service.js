@@ -14,7 +14,7 @@ export function fetchCocktail(dispatch, cocktails) {
             if (cocktails.find(c => c.idDrink === cocktail.idDrink)) {
                 console.log("retry");
             } else {
-                dispatch(fetchCocktailSuccess(cocktail));
+                dispatch(fetchCocktailSuccess(cocktail, cocktails));
             }
         })
         .catch(error => dispatch(fetchCocktailError(error)))

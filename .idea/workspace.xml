@@ -20,10 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b30ca9e-8b7b-4604-9875-92e5b0fe910c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/Home.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Likes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/components/DrinkCard.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/recipe.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DrinkCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DrinkCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/cocktails.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/cocktails.actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/cocktails.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/cocktails.reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/cocktails.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/cocktails.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
